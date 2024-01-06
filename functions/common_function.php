@@ -33,7 +33,40 @@ echo "<div class='col-md-4 mb-2'>
 }
 }
 }
-}                              
+} 
+
+//getting unique categories
+function get_all_products(){
+    global $con;
+    //condition to check isset or not
+    if(!isset($_GET['category'])){
+        if(!isset($_GET['brand'])){                           
+    $select_query ="select * from products order by rand()";
+    $result_query=mysqli_query($con,$select_query);
+    while ($row_data= mysqli_fetch_assoc($result_query)) {
+    $product_id = $row_data['product_id'];
+    $product_title = $row_data['product_title'];
+    $product_description = $row_data['product_description'];
+    $product_image1 = $row_data['product_image1'];
+    $product_price = $row_data['product_price'];
+    $category_id = $row_data['category_id'];
+    $brand_id = $row_data['brand_id'];
+    echo "<div class='col-md-4 mb-2'>
+    <div class='card' style='width: 18rem;'>
+    <img src='./admin_area/product_images/$product_image1'class='card-img-top'  alt='$product_title'>
+    <div class='card-body'>
+    <h5 class='card-title'>$product_title</h5>
+    <p class='card-text'>$product_description</p>
+    <a href='#' class='btn btn-info'>Add to Cart</a>
+    <a href='#' class='btn btn-secondary'>View more</a>
+    </div>
+    </div>
+    </div>";                           
+    }
+    }
+    }
+    } 
+    
 
 //getting unique categories
 
@@ -139,5 +172,42 @@ while ($row_data = mysqli_fetch_assoc($result_categories)) {
                               <a href='index.php?category=$category_id' class='nav-link text-light text-center'>$category_title</a>
                               </li>";
 }  
+}
+
+//function for searching product 
+
+function search_product(){
+global $con;   
+if(isset($_GET['search_data_product'])){ 
+    $search_data_value=$_GET['search_data'];                        
+$search_query ="select * from products where product_keyword like '%$search_data_value%'";
+$result_query=mysqli_query($con,$search_query);
+
+$num_of_rows=mysqli_num_rows($result_query);
+if($num_of_rows==0){
+echo "<h4 class='text-center text-danger'>No results match, no product found on this category!</h4>";                         
+}
+
+while ($row_data= mysqli_fetch_assoc($result_query)) {
+$product_id = $row_data['product_id'];
+$product_title = $row_data['product_title'];
+$product_description = $row_data['product_description'];
+$product_image1 = $row_data['product_image1'];
+$product_price = $row_data['product_price'];
+$category_id = $row_data['category_id'];
+$brand_id = $row_data['brand_id'];
+echo "<div class='col-md-4 mb-2'>
+<div class='card' style='width: 18rem;'>
+<img src='./admin_area/product_images/$product_image1'class='card-img-top'  alt='$product_title'>
+<div class='card-body'>
+<h5 class='card-title'>$product_title</h5>
+<p class='card-text'>$product_description</p>
+<a href='#' class='btn btn-info'>Add to Cart</a>
+<a href='#' class='btn btn-secondary'>View more</a>
+</div>
+</div>
+</div>";                           
+}
+}
 }
 ?>

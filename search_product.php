@@ -120,7 +120,6 @@ include('functions/common_function.php');
             <?php
             // Calling function
             search_product();
-            //get_all_products();
             get_unique_categories();
             get_unique_brands();
             ?>
