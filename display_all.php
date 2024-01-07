@@ -121,6 +121,10 @@ include('functions/common_function.php');
             getproducts();
             get_unique_categories();
             get_unique_brands();
+
+            //calling cart function
+
+            cart();
             ?>
             <!-- row end -->
             </div>

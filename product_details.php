@@ -63,8 +63,7 @@ include('functions/common_function.php');
                 </form>
             </div>
         </nav>
-    </div>  
-
+    </div>
 
     <!-- 2nd navbar -->
     <div class="container-fluid p-0">
@@ -96,7 +95,12 @@ include('functions/common_function.php');
                 <a href="#" class="nav-link text-light text-center"> <h5>Categories</h5></a>
             </li>
             <?php
-            getcategories()
+            getcategories();
+
+            //calling cart function
+
+            cart();
+
             ?>
             
             <!-- display different brands -->
@@ -115,26 +119,17 @@ include('functions/common_function.php');
 
         <!-- products -->
         <div class="col-md-10">
-            <div class="row px-1">
-
-            <!-- fetching products -->
-            <?php
-            // Calling function
-            search_product();
-            get_all_products();
-            get_unique_categories();
-            get_unique_brands();
-
-            //calling cart function
-
-            cart();
-             
-            //to display IP addres
-
-            // $ip = getIPAddress();  
-            // echo 'User Real IP Address - '.$ip;  
-            ?>
-            <!-- row end -->
+            <div class="row">                
+                <!-- fetching products -->
+                <?php
+                    // Calling function
+                    //search_product();
+                    //get_all_products()
+                    view_more();
+                    get_unique_categories();
+                    get_unique_brands();
+                ?>
+                <!-- row end -->
             </div>
             <!-- column end -->
         </div>
