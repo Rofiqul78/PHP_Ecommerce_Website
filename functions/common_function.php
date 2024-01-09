@@ -25,6 +25,7 @@ echo "<div class='col-md-4 mb-2'>
 <div class='card-body'>
 <h5 class='card-title'>$product_title</h5>
 <p class='card-text'>$product_description</p>
+<p class='card-text'>Price: $product_price</p>
 <a href='index.php?add_to_cart=$product_id' class='btn btn-info'>Add to Cart</a>
 <a href='product_details.php?product_id=$product_id' class='btn btn-secondary'>View more</a>
 </div>
@@ -57,6 +58,7 @@ function get_all_products(){
     <div class='card-body'>
     <h5 class='card-title'>$product_title</h5>
     <p class='card-text'>$product_description</p>
+    <p class='card-text'>Price: $product_price</p>
     <a href='index.php?add_to_cart=$product_id' class='btn btn-info'>Add to Cart</a>
     <a href='product_details.php?product_id=$product_id' class='btn btn-secondary'>View more</a>
     </div>
@@ -96,6 +98,7 @@ echo "<div class='col-md-4 mb-2'>
 <div class='card-body'>
 <h5 class='card-title'>$product_title</h5>
 <p class='card-text'>$product_description</p>
+<p class='card-text'>Price: $product_price</p>
 <a href='index.php?add_to_cart=$product_id' class='btn btn-info'>Add to Cart</a>
 <a href='product_details.php?product_id=$product_id' class='btn btn-secondary'>View more</a>
 </div>
@@ -133,6 +136,7 @@ echo "<div class='col-md-4 mb-2'>
 <div class='card-body'>
 <h5 class='card-title'>$product_title</h5>
 <p class='card-text'>$product_description</p>
+<p class='card-text'>Price: $product_price</p>
 <a href='index.php?add_to_cart=$product_id' class='btn btn-info'>Add to Cart</a>
 <a href='product_details.php?product_id=$product_id' class='btn btn-secondary'>View more</a>
 </div>
@@ -202,6 +206,7 @@ echo "<div class='col-md-4 mb-2'>
 <div class='card-body'>
 <h5 class='card-title'>$product_title</h5>
 <p class='card-text'>$product_description</p>
+<p class='card-text'>Price: $product_price</p>
 <a href='index.php?add_to_cart=$product_id' class='btn btn-info'>Add to Cart</a>
 <a href='product_details.php?product_id=$product_id' class='btn btn-secondary'>View more</a>
 </div>
@@ -238,6 +243,7 @@ function view_more(){
     <div class='card-body'>
     <h5 class='card-title'>$product_title</h5>
     <p class='card-text'>$product_description</p>
+    <p class='card-text'>Price: $product_price</p>
     <a href='index.php?add_to_cart=$product_id' class='btn btn-info'>Add to Cart</a>
     <a href='product_details.php?product_id=$product_id' class='btn btn-secondary'>View more</a>
     </div>
@@ -306,4 +312,43 @@ echo "<script>window.open('index.php','_self')</script>";
 }      
 }
 }
+
+//function to show cart item
+function cart_item(){
+    if(isset($_GET['add_to_cart'])){
+        global $con;
+        $get_ip_address = getIPAddress();
+        $select_query ="select * from cart_details where ip_address='$get_ip_address'";
+        $result_query=mysqli_query($con,$select_query);  
+        $num_of_rows=mysqli_num_rows($result_query);
+    }    
+    else{           
+        global $con;
+        $get_ip_address = getIPAddress();
+        $select_query ="select * from cart_details where ip_address='$get_ip_address'";
+        $result_query=mysqli_query($con,$select_query);  
+        $num_of_rows=mysqli_num_rows($result_query);
+    }  
+    echo "$num_of_rows";    
+}
+//Total price function 
+function total_cart_price(){
+    global $con;
+    $get_ip_address = getIPAddress();
+    $total_price=0;
+    $cart_query ="select * from cart_details where ip_address='$get_ip_address'";
+        $cart_result=mysqli_query($con,$cart_query);  
+        while ($row_data= mysqli_fetch_array($cart_result)){
+            $product_id = $row_data['product_id'];
+            $select_products="select * from products where product_id='$product_id'";
+            $product_result=mysqli_query($con,$select_products);
+            while ($row_product_price= mysqli_fetch_array($product_result)){  
+                $product_price=array($row_product_price['product_price']);//[90,190]
+                $product_sum=array_sum($product_price);//[280]
+                $total_price+= $product_sum;//[280]
+}        
+}
+echo $total_price;
+}
+
 ?>
