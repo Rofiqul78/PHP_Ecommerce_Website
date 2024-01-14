@@ -208,7 +208,7 @@ include('functions/common_function.php');
                     if($num_of_rows>0){
                         echo "<h4 class='px-3'>Subtotal: <strong class='text-info'>" . calculateSubtotal($con, $get_ip_address) . "</strong></h4>
                         <input type='submit' value='Continue Shopping' class='bg-info px-3 py-2 border-0' name='Continue_shopping'>
-                        <button class='bg-secondary px-3 py-2 border-0'><a href='checkout.php' class='text-light text-decoration-none'>Checkout</a></button>";
+                        <button class='bg-secondary px-3 py-2 border-0'><a href='user_area/checkout.php' class='text-light text-decoration-none'>Checkout</a></button>";
                     }
                     else{
                         echo "<input type='submit' value='Continue Shopping' class='bg-info px-3 py-2 border-0' name='continue_shopping'>"; 

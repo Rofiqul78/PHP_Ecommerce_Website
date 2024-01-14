@@ -41,7 +41,7 @@
 
                     <div class="mt-4 pt-2">
                         <input type="submit" value="Login" class="bg-info py-2 px-3 border-0" name="user_login">
-                        <p class="small fw-bold mt-2 pt-1"><b>Don't have an account ? <a href="./user_area/user_registration.php" 
+                        <p class="small fw-bold mt-2 pt-1"><b>Don't have an account ? <a href="../user_area/user_registration.php" 
                         class="text-danger"> Register</a></b></p>
                     </div>
                 </form>

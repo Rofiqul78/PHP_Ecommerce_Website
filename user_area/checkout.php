@@ -1,5 +1,5 @@
 <?php
-include('includes/connect.php');
+include('../includes/connect.php');
 ?>
 
 <!DOCTYPE html>
@@ -80,18 +80,19 @@ include('includes/connect.php');
 
     <div class="row">
         <?php
-            if(!isset($_SESSION['username'])){
-                include('user_area/user_login.php');  
+            if(!isset($_SESSION['username'])){//if there is no session for the user, advice user to login
+                include('user_login.php');  
             }
             else{
-                include('payment.php');  
+                include('../payment.php');  
             }
         ?>
     </div>
+
 <!-- include footer -->
 
 <?php
-include ('./includes/footer.php');
+include ('../includes/footer.php');
 ?>
 
 <!-- bootstrap js link -->
