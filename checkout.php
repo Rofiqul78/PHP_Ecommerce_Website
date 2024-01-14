@@ -1,6 +1,5 @@
 <?php
 include('includes/connect.php');
-include('functions/common_function.php');
 ?>
 
 <!DOCTYPE html>
@@ -10,7 +9,7 @@ include('functions/common_function.php');
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>E-commerce website using PHP, AJAX & MYSQL</title>
+    <title>Checkout Page</title>
 
     <!-- bootstrap css link  -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" 
@@ -48,21 +47,16 @@ include('functions/common_function.php');
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Contact</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="fa-solid fa-cart-shopping"></i> <sup><?php cart_item(); ?></sup></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Total Price:100/-</a>
-                    </li>
                 </ul>
-                <form class="d-flex">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-light" type="submit">Search</button>
+                <form class="d-flex" action="" method="GET">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search_data">
+                    <!-- <button class="btn btn-outline-light" type="submit">Search</button> -->
+                    <input type="submit" value="Search" class="btn btn-outline-light" name="search_data_product">
                 </form>
             </div>
         </nav>
-    </div>
+    </div>  
+
 
     <!-- 2nd navbar -->
     <div class="container-fluid p-0">
@@ -72,8 +66,8 @@ include('functions/common_function.php');
                     <a class="nav-link" href="#">Welcome Guest</a>
                 </li> 
                 <li class="nav-item">
-                    <a class="nav-link" href="./user_area/user_login.php">Login</a>
-                </li>                                    
+                    <a class="nav-link" href="#">Login</a>
+                </li>                                   
             </ul>                        
         </nav>
     </div>
@@ -84,54 +78,16 @@ include('functions/common_function.php');
         <p class="text-center"> "Shop Smarter, Live Better with Excel Daily Shopping."</p>
     </div>
 
-    <!-- sidenav & product column -->
     <div class="row">
-        <!-- sidenav -->
-        <div class="col-md-2 bg-secondary p-0">
-            <!-- display different product category -->
-            <ul class="navbar-nav me-auto"></ul>
-            <li class="nav-item bg-info">
-                <a href="#" class="nav-link text-light text-center"> <h5>Categories</h5></a>
-            </li>
-            <?php
-            getcategories()
-            ?>
-            
-            <!-- display different brands -->
-            <ul class="navbar-nav me-auto">
-                <li class="nav-item bg-info">
-                    <a href="#" class="nav-link text-light text-center"> <h5>Delivery Brands</h5></a>
-                </li>
-
-                <?php
-                // Call the brand to display brands
-                getbrands()
-                
-                ?>
-            </ul>
-        </div>
-
-        <!-- products -->
-        <div class="col-md-10">
-            <div class="row px-1">
-
-            <!-- fetching products -->
-            <?php
-            // Call the function to display products
-            getproducts();
-            get_unique_categories();
-            get_unique_brands();
-
-            //calling cart function
-
-            cart();
-            ?>
-            <!-- row end -->
-            </div>
-            <!-- column end -->
-        </div>
+        <?php
+            if(!isset($_SESSION['username'])){
+                include('user_area/user_login.php');  
+            }
+            else{
+                include('payment.php');  
+            }
+        ?>
     </div>
-
 <!-- include footer -->
 
 <?php
