@@ -1,6 +1,8 @@
 <?php
-session_start();
-include('../includes/connect.php');
+//session_start();
+include('includes/connect.php');
+include('functions/common_function.php');
+
 
 ?>
 
@@ -11,7 +13,7 @@ include('../includes/connect.php');
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Checkout Page</title>
+    <title>Dashboard</title>
 
     <!-- bootstrap css link  -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" 
@@ -39,16 +41,23 @@ include('../includes/connect.php');
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="index.php">Home </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="display_all.php">Products</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Register</a>
+                        <a class="nav-link" href="./user_area/user_registration.php">Register</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="cart.php"><i class="fa-solid fa-cart-shopping"></i> <sup><?php cart_item(); ?></sup></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Total Price: <?php total_cart_price(); ?></a>
+                    </li>
                 </ul>
                 <form class="d-flex" action="" method="GET">
                     <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search_data">
@@ -64,27 +73,27 @@ include('../includes/connect.php');
     <div class="container-fluid p-0">
         <nav class="navbar navbar-expand-lg navbar-dark bg-secondary mx-0">
             <ul class="navbar-nav me-auto">
-
-                    <?php
+                <?php
                         
+                        // var_dump($_SESSION['username']);
+
                         if(!isset($_SESSION['username'])){  //if there is no session for the user, advice user to login
                             echo "<li class='nav-item'>
                             <a class='nav-link' href='#'>Welcome Guest</a></li>";  
-                        }else{"<li class='nav-item'>
-                            <a class='nav-link' href='#'>Welcome ".$_SESSION['username']."</a></li>";
+                        }else{
+                            echo "<li class='nav-item'>
+                            <a class='nav-link' href='#'>Welcome ".$_SESSION['user_name']."</a></li>";
                         }
                         
                         if(!isset($_SESSION['username'])){   //if there is no session for the user, advice user to login
                             echo "<li class='nav-item'>
-                            <a class='nav-link' href='user_login.php'>Login</a></li>";  
+                            <a class='nav-link' href='user_area/user_login.php'>Login</a></li>";  
                         }else{
                             echo "<li class='nav-item'>
-                            <a class='nav-link' href='logout.php'>Logout</a></li>";
+                            <a class='nav-link' href='user_area/logout.php'>Logout</a></li>";
                         }
-                    ?> 
+                ?> 
 
-                </li> 
-                                      
             </ul>                        
         </nav>
     </div>
@@ -95,21 +104,65 @@ include('../includes/connect.php');
         <p class="text-center"> "Shop Smarter, Live Better with Excel Daily Shopping."</p>
     </div>
 
+    <!-- sidenav & product column -->
     <div class="row">
-        <?php
-            if(!isset($_SESSION['username'])){//if there is no session for the user, advice user to login
-                include('user_login.php');  
-            }
-            else{
-                include('payment.php');  
-            }
-        ?>
+        <!-- sidenav -->
+        <div class="col-md-2 bg-secondary p-0">
+            <!-- display different product category -->
+            <ul class="navbar-nav me-auto"></ul>
+            <li class="nav-item bg-info">
+                <a href="#" class="nav-link text-light text-center"> <h5>Categories</h5></a>
+            </li>
+            <?php
+            getcategories()
+            ?>
+            
+            <!-- display different brands -->
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item bg-info">
+                    <a href="#" class="nav-link text-light text-center"> <h5>Delivery Brands</h5></a>
+                </li>
+
+                <?php
+                // Call the brand to display brands
+                getbrands()
+                
+                ?>
+            </ul>
+        </div>
+
+        <!-- products -->
+        <div class="col-md-10">
+            <div class="row px-1">
+
+            <!-- fetching products -->
+            <?php
+            // Calling function
+            search_product();
+            getproducts();
+            // get_all_products();
+            get_unique_categories();
+            get_unique_brands();
+
+            //calling cart function
+
+            cart();
+             
+            //to display IP addres
+
+            // $ip = getIPAddress();  
+            // echo 'User Real IP Address - '.$ip;  
+            ?>
+            <!-- row end -->
+            </div>
+            <!-- column end -->
+        </div>
     </div>
 
 <!-- include footer -->
 
 <?php
-include ('../includes/footer.php');
+include ('./includes/footer.php');
 ?>
 
 <!-- bootstrap js link -->

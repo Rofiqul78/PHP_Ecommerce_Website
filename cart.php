@@ -51,13 +51,13 @@ include('functions/common_function.php');
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="display_all.php">Products</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Register</a>
+                        <a class="nav-link" href="./user_area/user_registration.php">Register</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Contact</a>
@@ -79,8 +79,8 @@ include('functions/common_function.php');
                     <a class="nav-link" href="#">Welcome Guest</a>
                 </li> 
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Login</a>
-                </li>                                   
+                    <a class="nav-link" href="./user_area/user_login.php">Login</a>
+                </li>                               
             </ul>                        
         </nav>
     </div>
@@ -152,7 +152,7 @@ include('functions/common_function.php');
                                  $total_price = $quantity * $price_table;
 
                             }
-                            }
+                        }
                     ?>
 
 <!-- update & remove button -->

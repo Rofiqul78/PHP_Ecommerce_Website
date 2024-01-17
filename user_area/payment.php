@@ -1,5 +1,6 @@
 <?php
-include('includes/connect.php');
+session_start();
+include('../includes/connect.php');
 ?>
 
 <!DOCTYPE html>
@@ -25,7 +26,7 @@ include('includes/connect.php');
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body style="overflow-x: hidden">
     <!-- 1st navbar -->
     <div class="container-fluid p-0">
         <nav class="navbar navbar-expand-lg navbar-light bg-info mx-0">
@@ -65,9 +66,17 @@ include('includes/connect.php');
                 <li class="nav-item">
                     <a class="nav-link" href="#">Welcome Guest</a>
                 </li> 
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Login</a>
-                </li>                                   
+                <?php
+
+                if(!isset($_SESSION['username'])){//if there is no session for the user, advice user to login
+                    echo "<li class='nav-item'>
+                    <a class='nav-link' href='user_login.php'>Login</a></li>";  
+                }else{
+                    echo "<li class='nav-item'>
+                    <a class='nav-link' href='logout.php'>Logout</a></li>";
+                }
+                        
+                ?>                                    
             </ul>                        
         </nav>
     </div>
@@ -81,7 +90,7 @@ include('includes/connect.php');
     <div class="row">
         <?php
             if(!isset($_SESSION['username'])){
-                include('user_area/user_login.php');  
+                include('user_login.php');  
             }
             else{
                 include('payment.php');  
@@ -91,7 +100,7 @@ include('includes/connect.php');
 <!-- include footer -->
 
 <?php
-include ('./includes/footer.php');
+include ('../includes/footer.php');
 ?>
 
 <!-- bootstrap js link -->

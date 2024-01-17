@@ -283,7 +283,7 @@ function getIPAddress() {
      }  
 //whether ip is from the remote address  
     else{  
-             $ip = $_SERVER['REMOTE_ADDR'];  
+        $ip = $_SERVER['REMOTE_ADDR'];  
      }  
      return $ip;  
 }  
@@ -350,5 +350,3 @@ function total_cart_price(){
 }
 echo $total_price;
 }
-
-?>

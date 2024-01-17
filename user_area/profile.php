@@ -1,7 +1,5 @@
 <?php
-session_start();
 include('../includes/connect.php');
-
 ?>
 
 <!DOCTYPE html>
@@ -11,7 +9,7 @@ include('../includes/connect.php');
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Checkout Page</title>
+    <title>Profile</title>
 
     <!-- bootstrap css link  -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" 
@@ -64,27 +62,12 @@ include('../includes/connect.php');
     <div class="container-fluid p-0">
         <nav class="navbar navbar-expand-lg navbar-dark bg-secondary mx-0">
             <ul class="navbar-nav me-auto">
-
-                    <?php
-                        
-                        if(!isset($_SESSION['username'])){  //if there is no session for the user, advice user to login
-                            echo "<li class='nav-item'>
-                            <a class='nav-link' href='#'>Welcome Guest</a></li>";  
-                        }else{"<li class='nav-item'>
-                            <a class='nav-link' href='#'>Welcome ".$_SESSION['username']."</a></li>";
-                        }
-                        
-                        if(!isset($_SESSION['username'])){   //if there is no session for the user, advice user to login
-                            echo "<li class='nav-item'>
-                            <a class='nav-link' href='user_login.php'>Login</a></li>";  
-                        }else{
-                            echo "<li class='nav-item'>
-                            <a class='nav-link' href='logout.php'>Logout</a></li>";
-                        }
-                    ?> 
-
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Welcome Guest</a>
                 </li> 
-                                      
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Login</a>
+                </li>                                   
             </ul>                        
         </nav>
     </div>
@@ -97,7 +80,7 @@ include('../includes/connect.php');
 
     <div class="row">
         <?php
-            if(!isset($_SESSION['username'])){//if there is no session for the user, advice user to login
+            if(!isset($_SESSION['username'])){
                 include('user_login.php');  
             }
             else{
@@ -105,7 +88,6 @@ include('../includes/connect.php');
             }
         ?>
     </div>
-
 <!-- include footer -->
 
 <?php

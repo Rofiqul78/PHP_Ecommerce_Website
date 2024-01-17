@@ -1,6 +1,7 @@
 <?php
 include('includes/connect.php');
 include('functions/common_function.php');
+session_start();
 ?>
 
 <!DOCTYPE html>
@@ -26,7 +27,7 @@ include('functions/common_function.php');
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body style="overflow-x: hidden">
     <!-- 1st navbar -->
     <div class="container-fluid p-0">
         <nav class="navbar navbar-expand-lg navbar-light bg-info mx-0">
@@ -37,8 +38,8 @@ include('functions/common_function.php');
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.php">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="display_all.php">Products</a>
@@ -50,7 +51,7 @@ include('functions/common_function.php');
                         <a class="nav-link" href="#">Contact</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="fa-solid fa-cart-shopping"></i> <sup><?php cart_item(); ?></sup></a>
+                        <a class="nav-link" href="cart.php"><i class="fa-solid fa-cart-shopping"></i> <sup><?php cart_item(); ?></sup></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Total Price: <?php total_cart_price(); ?></a>
@@ -72,9 +73,18 @@ include('functions/common_function.php');
                 <li class="nav-item">
                     <a class="nav-link" href="#">Welcome Guest</a>
                 </li> 
-                <li class="nav-item">
-                    <a class="nav-link" href="./user_area/user_login.php">Login</a>
-                </li>                                    
+                <?php
+
+                    if(!isset($_SESSION['username'])){//if there is no session for the user, advice user to login
+                        echo "<li class='nav-item'>
+                        <a class='nav-link' href='./user_area/user_login.php'>Login</a></li>";  
+                    }else{
+                        echo "<li class='nav-item'>
+                        <a class='nav-link' href='./user_area/logout.php'>Logout</a></li>";
+                    }
+                    
+                ?> 
+                               
             </ul>                        
         </nav>
     </div>
